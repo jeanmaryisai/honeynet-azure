@@ -70,20 +70,28 @@ The **SQL Server** was deployed to attract database-related attacks and analyze 
 
 ## Monitoring and Analysis
 
-The honeynet is continuously monitored using **Microsoft Sentinel**, **Zeek**, and **Wireshark** for detailed traffic analysis. **Heatmaps** were created to track brute-force SSH and RDP attacks, while SQL injection and FTP login attempts were analyzed on the corresponding servers.
+The honeynet is continuously monitored using **Microsoft Sentinel** for detailed traffic analysis. **Heatmaps** were created to track brute-force SSH and RDP attacks, while SQL injection and FTP login attempts were analyzed on the corresponding servers.
 
-## KQL Queries
 
-The following KQL (Kusto Query Language) queries are used to monitor key metrics related to security events, network flows, and incident alerts.
+The following table shows the metrics we measured in our insecure environment for 24 hours:
 
-| Metric                                       | Query                                                                                                                                            |
-|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Start/Stop Time**                          | `range x from 1 to 1 step 1`<br>`| project StartTime = ago(24h), StopTime = now()`                                                              |
-| **Security Events (Windows VMs)**            | `SecurityEvent`<br>`| where TimeGenerated>= ago(24h)`<br>`| count`                                                                       |
-| **Syslog (Linux VMs)**                       | `Syslog`<br>`| where TimeGenerated >= ago(24h)`<br>`| count`                                                                        |
-| **SecurityAlert (Microsoft Defender for Cloud)** | `SecurityAlert`<br>`| where DisplayName !startswith "CUSTOM" and DisplayName !startswith "TEST"`<br>`| where TimeGenerated >= ago(24h)`<br>`| count` |
-| **Security Incident (Sentinel Incidents)**   | `SecurityIncident`<br>`| where TimeGenerated >= ago(24h)`<br>`| count`                                                                       |
-| **NSG Inbound Malicious Flows Allowed**      | `AzureNetworkAnalytics_CL`<br>`| where FlowType_s == "MaliciousFlow" and AllowedInFlows_d > 0`<br>`| where TimeGenerated >= ago(24h)`<br>`| count` |
+
+| Metric                   | Count
+| ------------------------ | -----
+| SecurityEvent            | 10.5 k
+| Syslog                   | 8.21 k
+| SecurityAlert            | 40
+| SecurityIncident         | 23
+| AzureNetworkAnalytics_CL | 22.4k
+
+![Overview](img/overview.png)
+
+![Overview](img/incidents.png)
+
+![Overview](img/nsg.png)
+
+![Overview](img/ssh.png)
+
 
 ## Hardening
 
