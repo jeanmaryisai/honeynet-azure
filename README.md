@@ -3,7 +3,7 @@
 This project demonstrates the creation and monitoring of a honeynet deployed on Microsoft Azure. The honeynet is designed to attract and analyze a variety of cyberattacks in a controlled environment using multiple virtual machines (Linux, Windows), an FTP server, and a SQL Server. The honeynet was monitored using Microsoft Sentinel, Zeek, and other tools for detailed analysis of network traffic and potential threats.
 
 # Building a SOC + Honeynet in Azure (Live Traffic)
-![image](https://github.com//jeanmaryisai/honeynet-azure/img/165929885/video.png)
+![Green Neon Hacking Tutorials YouTube Thumbnail](https://github.com/user-attachments/assets/d3d77448-98e5-4ea0-96e8-9f533b044ebb)
 
 <h2>Video Demonstration</h2>
 
